@@ -30,7 +30,7 @@ public class SchedulerService {
 //    EntityManager entityManager;
 
 //    @SneakyThrows
-    @Scheduled(cron = "*/10 * * * * *")
+//    @Scheduled(cron = "*/10 * * * * *")
     public void importFile() {
         File file = new File("src/main/resources/customer.csv");
 
