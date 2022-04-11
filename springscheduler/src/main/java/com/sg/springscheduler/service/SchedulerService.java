@@ -1,18 +1,20 @@
 package com.sg.springscheduler.service;
+
 import com.sg.springscheduler.entity.Customer;
 import com.sg.springscheduler.enumerator.Language;
 import com.sg.springscheduler.enumerator.Status;
 import com.sg.springscheduler.repo.CustomerRepository;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class SchedulerService {
@@ -26,11 +28,9 @@ public class SchedulerService {
     @Autowired
     CustomerRepository customerRepository;
 
-//    @PersistenceContext
-//    EntityManager entityManager;
 
-//    @SneakyThrows
-//    @Scheduled(cron = "*/10 * * * * *")
+    //    @SneakyThrows
+    @Scheduled(cron = "*/10 * * * * *")
     public void importFile() {
         File file = new File("src/main/resources/customer.csv");
 
@@ -71,7 +71,6 @@ public class SchedulerService {
 //                data.add(row[6].trim());
 //                dataEntry(data);
             }
-
             bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,9 +79,9 @@ public class SchedulerService {
 
     public void dataEntry(List<String> data) {
 
-        int fetchSize = jdbcTemplate.getFetchSize();
-        System.out.println("fetch size=" + fetchSize);
+//        int fetchSize = jdbcTemplate.getFetchSize();
         Customer customer = new Customer();
+        customer.setId(UUID.randomUUID().toString());
         customer.setUserName(data.get(0));
         customer.setFirstName(data.get(1));
         customer.setLastName(data.get(2));

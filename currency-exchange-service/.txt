@@ -1,0 +1,17 @@
+Currency Exchange service
+http://localhost:8000/currency-exchange/from/USD/to/INR
+
+Currency Conversion Service
+http://localhost:8000/currency-exchange/from/USD/to/INR/quantity/10
+
+api gateway
+localhost:8765/CURRENCY-EXCHANGE/currency-exchange/from/USD/to/INR
+localhost:8765/CURRENCY-CONVERSION/currency-conversion/from/USD/to/INR
+localhost:8765/CURRENCY-CONVERSION/currency-conversion-feign/from/USD/to/INR
+
+api gateway - after adding lowercase property
+localhost:8765/currency-exchange/currency-exchange/from/USD/to/INR
+localhost:8765/currency-conversion/currency-conversion/from/USD/to/INR
+localhost:8765/currency-conversion/currency-conversion-feign/from/USD/to/INR
+
+

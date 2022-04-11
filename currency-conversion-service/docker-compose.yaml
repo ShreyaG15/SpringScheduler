@@ -1,0 +1,35 @@
+services:
+  currency-exchange:
+    image: sg-micro-service-docker/v2-currency-exchange-service:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE:http://naming-server:8761/eureka:
+
+  naming-server:
+    image: sg-micro-service-docker/v2-naming-server:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8762:8762"
+    networks:
+      - currency-network
+
+currency-conversion:
+  image: sg-micro-service-docker/v2-currency-conversion-service:0.0.1-SNAPSHOT
+  mem_limit: 700m
+  ports:
+    - "8100:8100"
+  networks:
+    - currency-network
+  depends_on:
+    - naming-server
+  environment:
+    EUREKA.CLIENT.SERVICEURL.DEFAULTZONE:http://naming-server:8761/eureka:
+
+networks:
+  currency-network:
